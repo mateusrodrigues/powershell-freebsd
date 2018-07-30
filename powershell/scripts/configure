@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# restore all packages
+dotnet restore ${WRKSRC}/src/powershell-unix/powershell-unix.csproj
+dotnet restore ${WRKSRC}/src/ResGen/ResGen.csproj
+dotnet restore ${WRKSRC}/src/TypeCatalogGen/TypeCatalogGen.csproj
+
+# copy necessary files
+cp files/git-describe.txt ${WRKSRC}/git-describe.txt
+
+# configure PowerShell-Native
+cd ${WRKDIR}/pwshnative/src/libpsl-native && cmake -DCMAKE_BUILD_TYPE=Debug .

@@ -1,0 +1,11 @@
+--- PowerShell.Common.props
++++ PowerShell.Common.props
+@@ -14,7 +14,7 @@
+     BeforeTargets="_GenerateRestoreProjectSpec;GenerateNuspec;BeforeBuild"
+   >
+ 
+-    <Exec Command='git describe --abbrev=60 --long'
++    <Exec Command='cat ${WRKSRC}/git-describe.txt'
+           WorkingDirectory="$(MSBuildProjectDirectory)"
+           ConsoleToMSBuild="true"
+           StandardOutputImportance="Low">
