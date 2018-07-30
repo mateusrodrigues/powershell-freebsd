@@ -9,14 +9,14 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 MAINTAINER=	mateus@mateus.tech
-COMMENT=	Microsoft PowerShell
+COMMENT=	PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 
-USES=		mono:dotnet shebangfix
-NUGET_DEPENDS=		libpsl=6.0.0-rc \
+USES=		mono:nuget
+NUGET_DEPENDS=	libpsl=6.0.0-rc:myget \
 		Markdig.Signed=0.15.1 \
 		Microsoft.ApplicationInsights=2.6.4 \
 		Microsoft.CodeAnalysis.Analyzers=1.1.0 \
@@ -185,6 +185,8 @@ NUGET_DEPENDS=		libpsl=6.0.0-rc \
 		Microsoft.PowerShell.SDK=6.1.0-preview.4 \
 		Microsoft.PowerShell.Security=6.1.0-preview.4 \
 		System.Management.Automation=6.1.0-preview.4
+
+MASTER_SITES_myget=	https://dotnet.myget.org/F/powershell-core/api/v2/package
 
 MAKE_JOBS_UNSAFE=	yes
 
