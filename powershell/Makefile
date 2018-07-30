@@ -31,7 +31,7 @@ post-extract:
 
 pre-patch:
 	# copy git describe file
-	cp files/git-describe.txt ${WRKSRC}/git-describe.txt
+	${CP} files/git-describe.txt ${WRKSRC}/git-describe.txt
 
 build:
 	# copy shared framework version
@@ -44,6 +44,11 @@ build:
 	sh -c "cd ${WRKSRC}/src/TypeCatalogGen && dotnet run ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc"
 	# build powershell
 	sh -c "cd ${WRKSRC}/src/powershell-unix && dotnet build"
-	build powershell-native
+	# build powershell-native
 	sh -c "cd ${WRKDIR}/pwshnative/src/libpsl-native && make"
+	# copy native build results
+	${CP} ${WRKDIR}/pwshnative/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/libpsl-native.so
+	# copy executable
+	${CP} files/pwsh ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/pwsh
+
 .include <bsd.port.mk>

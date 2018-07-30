@@ -1,0 +1,3 @@
+#!/bin/sh
+
+dotnet /usr/local/share/powershell/pwsh.dll
