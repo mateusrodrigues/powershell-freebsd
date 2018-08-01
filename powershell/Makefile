@@ -16,8 +16,8 @@ GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 
 USES=		mono:nuget
-NUGET_DEPENDS=	libpsl=6.0.0-rc:myget \
-		Markdig.Signed=0.15.1 \
+NUGET_FEEDS=	NUGET POWERSHELL_CORE
+NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.ApplicationInsights=2.6.4 \
 		Microsoft.CodeAnalysis.Analyzers=1.1.0 \
 		Microsoft.CodeAnalysis.Common=2.8.2 \
@@ -38,10 +38,6 @@ NUGET_DEPENDS=	libpsl=6.0.0-rc:myget \
 		NETStandard.Library=2.0.3 \
 		Newtonsoft.Json=11.0.2 \
 		NJsonSchema=9.10.63 \
-		PowerShell.Core.Instrumentation=6.0.0-beta.10 \
-		PowerShellHelpFiles=1.0.0-alpha02 \
-		PSDesiredStateConfiguration=6.0.0-beta.8 \
-		psrp=1.4.2 \
 		runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
@@ -177,16 +173,20 @@ NUGET_DEPENDS=	libpsl=6.0.0-rc:myget \
 		System.Xml.XmlSerializer=4.3.0 \
 		System.Xml.XPath=4.3.0 \
 		System.Xml.XPath.XDocument=4.3.0 \
-		Microsoft.PowerShell.Commands.Management=6.1.0-preview.4 \
-		Microsoft.PowerShell.Commands.Utility=6.1.0-preview.4 \
-		Microsoft.PowerShell.ConsoleHost=6.1.0-preview.4 \
-		Microsoft.PowerShell.CoreCLR.Eventing=6.1.0-preview.4 \
-		Microsoft.PowerShell.MarkdownRender=6.1.0-preview.4 \
-		Microsoft.PowerShell.SDK=6.1.0-preview.4 \
-		Microsoft.PowerShell.Security=6.1.0-preview.4 \
-		System.Management.Automation=6.1.0-preview.4
 
-MASTER_SITES_myget=	https://dotnet.myget.org/F/powershell-core/api/v2/package
+POWERSHELL_CORE_DEPENDS=	libpsl-6.0.0-rc \
+				PowerShell.Core.Instrumentation=6.0.0-beta.10 \
+				PowerShellHelpFiles=1.0.0-alpha02 \
+				PSDesiredStateConfiguration=6.0.0-beta.8 \
+				psrp=1.4.2 \
+				Microsoft.PowerShell.Commands.Management=6.1.0-preview.4 \
+				Microsoft.PowerShell.Commands.Utility=6.1.0-preview.4 \
+				Microsoft.PowerShell.ConsoleHost=6.1.0-preview.4 \
+				Microsoft.PowerShell.CoreCLR.Eventing=6.1.0-preview.4 \
+				Microsoft.PowerShell.MarkdownRender=6.1.0-preview.4 \
+				Microsoft.PowerShell.SDK=6.1.0-preview.4 \
+				Microsoft.PowerShell.Security=6.1.0-preview.4 \
+				System.Management.Automation=6.1.0-preview.4
 
 MAKE_JOBS_UNSAFE=	yes
 
