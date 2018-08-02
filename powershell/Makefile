@@ -15,7 +15,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 
-USES=		mono:nuget
+#USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
 POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
@@ -211,13 +211,13 @@ build:
 	# copy shared framework version
 	dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
 	# generate ResGen files
-	sh -c "cd ${WRKSRC}/src/ResGen && dotnet build && dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/Debug/netcoreapp2.0/resgen.dll"
+	sh -c "cd ${WRKSRC}/src/ResGen && dotnet build --no-restore && dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/Debug/netcoreapp2.0/resgen.dll"
 	# generate type catalog
 	cat files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
 	dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
-	sh -c "cd ${WRKSRC}/src/TypeCatalogGen && dotnet run ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc"
+	sh -c "cd ${WRKSRC}/src/TypeCatalogGen && dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc"
 	# build powershell
-	sh -c "cd ${WRKSRC}/src/powershell-unix && dotnet build"
+	sh -c "cd ${WRKSRC}/src/powershell-unix && dotnet build --no-restore"
 	# build powershell-native
 	sh -c "cd ${WRKDIR}/pwshnative/src/libpsl-native && make"
 	# copy native build results
