@@ -17,6 +17,7 @@ GH_PROJECT=	PowerShell
 
 USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
+POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.ApplicationInsights=2.6.4 \
 		Microsoft.CodeAnalysis.Analyzers=1.1.0 \
