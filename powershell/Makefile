@@ -15,7 +15,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 
-#USES=		mono:nuget
+USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
 POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
