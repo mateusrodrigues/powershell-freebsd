@@ -175,7 +175,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.Xml.XPath=4.3.0 \
 		System.Xml.XPath.XDocument=4.3.0 \
 
-POWERSHELL_CORE_DEPENDS=	libpsl-6.0.0-rc \
+POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
 				PowerShell.Core.Instrumentation=6.0.0-beta.10 \
 				PowerShellHelpFiles=1.0.0-alpha02 \
 				PSDesiredStateConfiguration=6.0.0-beta.8 \
