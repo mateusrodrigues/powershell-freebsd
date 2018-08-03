@@ -30,7 +30,10 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.NETCore.DotNetAppHost=2.1.2 \
 		Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
 		Microsoft.NETCore.DotNetHostResolver=2.1.2 \
+		Microsoft.NETCore.Platforms=1.1.0 \
+		Microsoft.NETCore.Platforms=2.0.0 \
 		Microsoft.NETCore.Platforms=2.1.0 \
+		Microsoft.NETCore.Targets=1.1.0 \
 		Microsoft.NETCore.Targets=2.0.0 \
 		Microsoft.NETCore.Windows.ApiSets=1.0.1 \
 		Microsoft.Win32.Registry=4.5.0 \
@@ -38,7 +41,9 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.Win32.SystemEvents=4.5.0 \
 		Microsoft.Windows.Compatibility=2.0.0 \
 		Microsoft.Windows.Compatibility.Shims=2.0.0 \
+		NETStandard.Library=1.6.1 \
 		NETStandard.Library=2.0.3 \
+		Newtonsoft.Json=9.0.1 \
 		Newtonsoft.Json=11.0.2 \
 		NJsonSchema=9.10.63 \
 		runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
@@ -122,6 +127,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.Reflection.Emit.ILGeneration=4.3.0 \
 		System.Reflection.Emit.Lightweight=4.3.0 \
 		System.Reflection.Extensions=4.3.0 \
+		System.Reflection.Metadata=1.4.1 \
 		System.Reflection.Metadata=1.4.2 \
 		System.Reflection.Primitives=4.3.0 \
 		System.Reflection.TypeExtensions=4.3.0 \
@@ -138,6 +144,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.Runtime.Serialization.Xml=4.3.0 \
 		System.Security.AccessControl=4.5.0 \
 		System.Security.Cryptography.Algorithms=4.3.0 \
+		System.Security.Cryptography.Cng=4.3.0 \
 		System.Security.Cryptography.Cng=4.5.0 \
 		System.Security.Cryptography.Csp=4.3.0 \
 		System.Security.Cryptography.Encoding=4.3.0 \
@@ -158,6 +165,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.ServiceModel.Syndication=4.5.0 \
 		System.ServiceProcess.ServiceController=4.5.0 \
 		System.Text.Encoding=4.3.0 \
+		System.Text.Encoding.CodePages=4.3.0 \
 		System.Text.Encoding.CodePages=4.5.0 \
 		System.Text.Encoding.Extensions=4.3.0 \
 		System.Text.Encodings.Web=4.5.0 \
