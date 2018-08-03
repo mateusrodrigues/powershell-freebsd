@@ -1,4 +1,4 @@
-TIMESTAMP = 1533206986
+TIMESTAMP = 1533260354
 SHA256 (markdig.signed.0.15.1.nupkg) = d95be7c2343fbe6877c3bb3f460a14221de159624faee9e60f109b8e9348de4e
 SIZE (markdig.signed.0.15.1.nupkg) = 962242
 SHA256 (microsoft.applicationinsights.2.6.4.nupkg) = 0178e3b17f882bba652463b107fd0e0fd709f63103035f7d80cdec624dd665ee
@@ -339,3 +339,7 @@ SHA256 (system.management.automation.6.1.0-preview.4.nupkg) = 3300e2b288fc9ac452
 SIZE (system.management.automation.6.1.0-preview.4.nupkg) = 32656205
 SHA256 (PowerShell-PowerShell-v6.1.0-preview.4_GH0.tar.gz) = a2826de74a481f0d3ec6445939ab1d1251dcae2760135a8a3d114ef4b217a490
 SIZE (PowerShell-PowerShell-v6.1.0-preview.4_GH0.tar.gz) = 10070700
+SHA256 (PowerShell-PowerShell-Native-98599da_GH0.tar.gz) = fb12c15312f44de0964cdf3c886985d735743d586cc12612f2d2d1a9bad0c80c
+SIZE (PowerShell-PowerShell-Native-98599da_GH0.tar.gz) = 268772
+SHA256 (google-googletest-4e4df22_GH0.tar.gz) = c69bab93a31eb131cb39d752b5cbc60291eab1a3ddf11fc953bac258ffaa90e7
+SIZE (google-googletest-4e4df22_GH0.tar.gz) = 986174

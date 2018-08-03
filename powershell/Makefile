@@ -14,8 +14,10 @@ COMMENT=	PowerShell is a task automation and configuration management framework 
 USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
+GH_TUPLE=	PowerShell:PowerShell-Native:98599da:1/external/powershell-native \
+		google:googletest:4e4df22:2/external/powershell-native/src/libpsl-native/test/googletest
 
-USES=		mono:nuget
+#USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
 POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
@@ -189,6 +191,9 @@ POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
 				Microsoft.PowerShell.Security=6.1.0-preview.4 \
 				System.Management.Automation=6.1.0-preview.4
 
+
+SUB_FILES=	patch-PowerShell.Common.props
+SUB_LIST=	WRKSRC=${WRKSRC}
 MAKE_JOBS_UNSAFE=	yes
 
 # .NET related
@@ -199,13 +204,12 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export SSL_CERT_FILE=/usr/local/share/certs/ca-root-nss.crt
 export DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 
-post-extract:
-	# clone powershell-native
-	git clone --recurse-submodules https://github.com/PowerShell/PowerShell-Native ${WRKDIR}/pwshnative
-
 pre-patch:
 	# copy git describe file
 	${CP} files/git-describe.txt ${WRKSRC}/git-describe.txt
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|%%WRKSRC%%|${WRKSRC}|g' ${WRKSRC}/PowerShell.Common.props
 
 build:
 	# copy shared framework version
@@ -219,9 +223,9 @@ build:
 	# build powershell
 	sh -c "cd ${WRKSRC}/src/powershell-unix && dotnet build --no-restore"
 	# build powershell-native
-	sh -c "cd ${WRKDIR}/pwshnative/src/libpsl-native && make"
+	sh -c "cd ${WRKSRC}/external/powershell-native/src/libpsl-native && make"
 	# copy native build results
-	${CP} ${WRKDIR}/pwshnative/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/libpsl-native.so
+	${CP} ${WRKSRC}/external/powershell-native/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/libpsl-native.so
 	# copy executable
 	${CP} files/pwsh ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/pwsh
 

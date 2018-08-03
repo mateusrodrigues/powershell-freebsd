@@ -5,7 +5,7 @@
    >
  
 -    <Exec Command='git describe --abbrev=60 --long'
-+    <Exec Command='cat $(pwd)/work/PowerShell-6.1.0-preview.4/git-describe.txt'
++    <Exec Command='cat %%WRKSRC%%/git-describe.txt'
            WorkingDirectory="$(MSBuildProjectDirectory)"
            ConsoleToMSBuild="true"
            StandardOutputImportance="Low">

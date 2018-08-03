@@ -9,4 +9,4 @@ dotnet restore --source ${WRKDIR}/.nuget/packages ${WRKSRC}/src/TypeCatalogGen/T
 cp files/git-describe.txt ${WRKSRC}/git-describe.txt
 
 # configure PowerShell-Native
-cd ${WRKDIR}/pwshnative/src/libpsl-native && cmake -DCMAKE_BUILD_TYPE=Release .
+cd ${WRKSRC}/external/powershell-native/src/libpsl-native && cmake -DCMAKE_BUILD_TYPE=Release .
