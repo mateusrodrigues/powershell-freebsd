@@ -17,7 +17,7 @@ GH_PROJECT=	PowerShell
 GH_TUPLE=	PowerShell:PowerShell-Native:98599da:1/external/powershell-native \
 		google:googletest:4e4df22:2/external/powershell-native/src/libpsl-native/test/googletest
 
-#USES=		mono:nuget
+USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
 POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
@@ -26,6 +26,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.CodeAnalysis.Common=2.8.2 \
 		Microsoft.CodeAnalysis.CSharp=2.8.2 \
 		Microsoft.Management.Infrastructure=1.0.0-alpha08 \
+		Microsoft.NETCore.App=2.0.0 \
 		Microsoft.NETCore.App=2.1.2 \
 		Microsoft.NETCore.DotNetAppHost=2.1.2 \
 		Microsoft.NETCore.DotNetHostPolicy=2.1.2 \

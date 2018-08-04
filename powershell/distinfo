@@ -1,4 +1,4 @@
-TIMESTAMP = 1533265436
+TIMESTAMP = 1533383427
 SHA256 (markdig.signed.0.15.1.nupkg) = d95be7c2343fbe6877c3bb3f460a14221de159624faee9e60f109b8e9348de4e
 SIZE (markdig.signed.0.15.1.nupkg) = 962242
 SHA256 (microsoft.applicationinsights.2.6.4.nupkg) = 0178e3b17f882bba652463b107fd0e0fd709f63103035f7d80cdec624dd665ee
@@ -11,6 +11,8 @@ SHA256 (microsoft.codeanalysis.csharp.2.8.2.nupkg) = 916fd7013045c2538922835d4d6
 SIZE (microsoft.codeanalysis.csharp.2.8.2.nupkg) = 2812784
 SHA256 (microsoft.management.infrastructure.1.0.0-alpha08.nupkg) = 12efcc950e8de05239573029ffcbe56895334e69f32e08469b09e9247cb84efe
 SIZE (microsoft.management.infrastructure.1.0.0-alpha08.nupkg) = 4216018
+SHA256 (microsoft.netcore.app.2.0.0.nupkg) = ac55eb93177336159766071b2151e9655143b49bd50a64b1b0906c38abfbbf2b
+SIZE (microsoft.netcore.app.2.0.0.nupkg) = 4063102
 SHA256 (microsoft.netcore.app.2.1.2.nupkg) = 3def0f9c66581aa1f381d026091a1192742020e77a2d3ae739d6ababb7fcf6db
 SIZE (microsoft.netcore.app.2.1.2.nupkg) = 4104609
 SHA256 (microsoft.netcore.dotnetapphost.2.1.2.nupkg) = 0722860d3b64444bc1c06adce191a5015010482cb10795b30ed9fd4dd219018d
