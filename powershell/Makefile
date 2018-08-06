@@ -119,6 +119,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.Diagnostics.FileVersionInfo=4.3.0 \
 		System.Diagnostics.PerformanceCounter=4.5.0 \
 		System.Diagnostics.StackTrace=4.3.0 \
+		System.Diagnostics.Tools=4.0.1 \
 		System.Diagnostics.Tools=4.3.0 \
 		System.Diagnostics.Tracing=4.3.0 \
 		System.DirectoryServices=4.5.0 \
