@@ -29,6 +29,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.NETCore.App=2.0.0 \
 		Microsoft.NETCore.App=2.1.2 \
 		Microsoft.NETCore.DotNetAppHost=2.1.2 \
+		Microsoft.NETCore.DotNetHostPolicy=2.0.0 \
 		Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
 		Microsoft.NETCore.DotNetHostResolver=2.1.2 \
 		Microsoft.NETCore.Platforms=1.1.0 \
@@ -43,6 +44,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		Microsoft.Windows.Compatibility=2.0.0 \
 		Microsoft.Windows.Compatibility.Shims=2.0.0 \
 		NETStandard.Library=1.6.1 \
+		NETStandard.Library=2.0.0 \
 		NETStandard.Library=2.0.3 \
 		Newtonsoft.Json=9.0.1 \
 		Newtonsoft.Json=11.0.2 \
@@ -50,6 +52,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
+		runtime.linux-x64.Microsoft.NETCore.App=2.0.0 \
 		runtime.linux-x64.Microsoft.NETCore.App=2.1.2 \
 		runtime.linux-x64.Microsoft.NETCore.DotNetAppHost=2.1.2 \
 		runtime.linux-x64.Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
@@ -62,6 +65,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
+		runtime.osx-x64.Microsoft.NETCore.App=2.0.0 \
 		runtime.osx-x64.Microsoft.NETCore.App=2.1.2 \
 		runtime.osx-x64.Microsoft.NETCore.DotNetAppHost=2.1.2 \
 		runtime.osx-x64.Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
@@ -72,6 +76,22 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
 		runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl=4.3.0 \
+		runtime.win-x64.Microsoft.NETCore.App=2.0.0 \
+		runtime.win-x64.Microsoft.NETCore.App=2.1.2 \
+		runtime.win-x64.Microsoft.NETCore.DotNetAppHost=2.0.0 \
+		runtime.win-x64.Microsoft.NETCore.DotNetAppHost=2.1.2 \
+		runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy=2.0.0 \
+		runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
+		runtime.win-x64.Microsoft.NETCore.DotNetHostResolver=2.0.0 \
+		runtime.win-x64.Microsoft.NETCore.DotNetHostResolver=2.1.2 \
+		runtime.win-x86.Microsoft.NETCore.App=2.0.0 \
+		runtime.win-x86.Microsoft.NETCore.App=2.1.2 \
+		runtime.win-x86.Microsoft.NETCore.DotNetAppHost=2.0.0 \
+		runtime.win-x86.Microsoft.NETCore.DotNetAppHost=2.1.2 \
+		runtime.win-x86.Microsoft.NETCore.DotNetHostPolicy=2.0.0 \
+		runtime.win-x86.Microsoft.NETCore.DotNetHostPolicy=2.1.2 \
+		runtime.win-x86.Microsoft.NETCore.DotNetHostResolver=2.0.0 \
+		runtime.win-x86.Microsoft.NETCore.DotNetHostResolver=2.1.2 \
 		runtime.win-arm64.runtime.native.System.Data.SqlClient.sni=4.4.0 \
 		runtime.win-x64.runtime.native.System.Data.SqlClient.sni=4.4.0 \
 		runtime.win-x86.runtime.native.System.Data.SqlClient.sni=4.4.0 \
