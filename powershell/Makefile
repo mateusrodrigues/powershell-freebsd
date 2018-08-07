@@ -183,6 +183,7 @@ NUGET_DEPENDS=	Markdig.Signed=0.15.1 \
 		System.Runtime.CompilerServices.VisualC=4.3.0 \
 		System.Runtime.Extensions=4.1.0 \
 		System.Runtime.Extensions=4.3.0 \
+		System.Runtime.Handles=4.0.1 \
 		System.Runtime.Handles=4.3.0 \
 		System.Runtime.InteropServices=4.1.0 \
 		System.Runtime.InteropServices=4.3.0 \
