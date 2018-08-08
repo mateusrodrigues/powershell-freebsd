@@ -261,6 +261,8 @@ SUB_FILES=	patch-PowerShell.Common.props
 SUB_LIST=	WRKSRC=${WRKSRC}
 MAKE_JOBS_UNSAFE=	yes
 
+BUILD_CONFIGURATION=	Release
+
 # .NET related
 export COMPlus_ZapDisable=1
 export COMPlus_ReadyToRun=0
@@ -280,18 +282,21 @@ build:
 	# copy shared framework version
 	dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
 	# generate ResGen files
-	sh -c "cd ${WRKSRC}/src/ResGen && dotnet build --no-restore && dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/Debug/netcoreapp2.0/resgen.dll"
+	(cd ${WRKSRC}/src/ResGen && \
+	       dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
+	       dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
 	# generate type catalog
 	cat files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
 	dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
-	sh -c "cd ${WRKSRC}/src/TypeCatalogGen && dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc"
+	(cd ${WRKSRC}/src/TypeCatalogGen && \
+	       dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
 	# build powershell
-	sh -c "cd ${WRKSRC}/src/powershell-unix && dotnet build --no-restore"
+	(cd ${WRKSRC}/src/powershell-unix && \
+		dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
 	# build powershell-native
-	sh -c "cd ${WRKSRC}/external/powershell-native/src/libpsl-native && make"
+	(cd ${WRKSRC}/external/powershell-native/src/libpsl-native && \
+	       make)
 	# copy native build results
-	${CP} ${WRKSRC}/external/powershell-native/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/libpsl-native.so
-	# copy executable
-	${CP} files/pwsh ${WRKSRC}/src/powershell-unix/bin/Debug/netcoreapp2.1/pwsh
+	${CP} ${WRKSRC}/external/powershell-native/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/${BUILD_CONFIGURATION}/netcoreapp2.1/libpsl-native.so
 
 .include <bsd.port.mk>
