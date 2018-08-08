@@ -1,6 +1,7 @@
-This is a port of oneko, in which a cat chases a poor mouse all over
-the screen.
- :
-(etc.)
+Built on the .NET Framework, PowerShell is a task-based command-line shell
+and scripting language; it is designed specifically for system administrators
+and power-users, to rapidly automate the administration of multiple operating
+systems (Linux, macOS, Unix, and Windows) and the processes related to the
+applications that run on those operating systems.
 
-WWW: http://www.oneko.org/
+WWW: https://docs.microsoft.com/powershell
