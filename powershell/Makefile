@@ -34,43 +34,34 @@ POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
 				Microsoft.PowerShell.Security=6.1.0-preview.4 \
 				System.Management.Automation=6.1.0-preview.4
 
-
-SUB_FILES=	patch-PowerShell.Common.props
-SUB_LIST=	WRKSRC=${WRKSRC}
 MAKE_JOBS_UNSAFE=	yes
-
 BUILD_CONFIGURATION=	Release
-
-# .NET related
-export COMPlus_ZapDisable=1
-export COMPlus_ReadyToRun=0
-export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export SSL_CERT_FILE=/usr/local/share/certs/ca-root-nss.crt
-export DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
-
-pre-patch:
-	# copy git describe file
-	${CP} files/git-describe.txt ${WRKSRC}/git-describe.txt
+MAKE_ENV=	COMPlus_ZapDisable=1 \
+		COMPlus_ReadyToRun=0 \
+		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
+		DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+		SSL_CERT_FILE=/usr/local/share/certs/ca-root-nss.crt \
+		DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER=0
 
 post-patch:
+	@${CP} files/git-describe.txt ${WRKSRC}/git-describe.txt
 	@${REINPLACE_CMD} -e 's|%%WRKSRC%%|${WRKSRC}|g' ${WRKSRC}/PowerShell.Common.props
 
-build:
+do-build:
 	# copy shared framework version
-	dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
+	${SETENV} ${MAKE_ENV} dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
 	# generate ResGen files
 	(cd ${WRKSRC}/src/ResGen && \
-	       dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
-	       dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
+	       ${SETENV} ${MAKE_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
+	       ${SETENV} ${MAKE_ENV} dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
 	# generate type catalog
 	cat files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
-	dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
+	${SETENV} ${MAKE_ENV} dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
 	(cd ${WRKSRC}/src/TypeCatalogGen && \
-	       dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
+	       ${SETENV} ${MAKE_ENV} dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
 	# build powershell
 	(cd ${WRKSRC}/src/powershell-unix && \
-		dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
+		${SETENV} ${MAKE_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
 	# build powershell-native
 	(cd ${WRKSRC}/external/powershell-native/src/libpsl-native && \
 	       make)
