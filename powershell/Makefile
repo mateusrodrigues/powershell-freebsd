@@ -5,19 +5,23 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	6.1.0-preview.4
 CATEGORIES=	shells
 
-LICENSE=	MIT
-LICENSE_FILE=	${WRKSRC}/LICENSE.txt
-
 MAINTAINER=	mateus@mateus.tech
 COMMENT=	PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.
 
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/LICENSE.txt
+
+ONLY_FOR_ARCHS=	amd64 i386
+
+BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
+RUN_DEPENDS=	dotnet:devel/dotnet
+
+USES=		mono:nuget
 USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 GH_TUPLE=	PowerShell:PowerShell-Native:98599da:1/external/powershell-native \
 		google:googletest:4e4df22:2/external/powershell-native/src/libpsl-native/test/googletest
-
-USES=		mono:nuget
 NUGET_FEEDS=	NUGET POWERSHELL_CORE
 POWERSHELL_CORE_URL=	https://powershell.myget.org/F/powershell-core/api/v2/
 POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
@@ -36,7 +40,7 @@ POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
 
 MAKE_JOBS_UNSAFE=	yes
 BUILD_CONFIGURATION=	Release
-MAKE_ENV=	COMPlus_ZapDisable=1 \
+DOTNET_ENV=	COMPlus_ZapDisable=1 \
 		COMPlus_ReadyToRun=0 \
 		DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
 		DOTNET_CLI_TELEMETRY_OPTOUT=1 \
@@ -49,19 +53,19 @@ post-patch:
 
 do-build:
 	# copy shared framework version
-	${SETENV} ${MAKE_ENV} dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
+	${SETENV} ${DOTNET_ENV} dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
 	# generate ResGen files
 	(cd ${WRKSRC}/src/ResGen && \
-	       ${SETENV} ${MAKE_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
-	       ${SETENV} ${MAKE_ENV} dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
+	       ${SETENV} ${DOTNET_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
+	       ${SETENV} ${DOTNET_ENV} dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
 	# generate type catalog
 	cat files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
-	${SETENV} ${MAKE_ENV} dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
+	${SETENV} ${DOTNET_ENV} dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
 	(cd ${WRKSRC}/src/TypeCatalogGen && \
-	       ${SETENV} ${MAKE_ENV} dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
+	       ${SETENV} ${DOTNET_ENV} dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
 	# build powershell
 	(cd ${WRKSRC}/src/powershell-unix && \
-		${SETENV} ${MAKE_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
+		${SETENV} ${DOTNET_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
 	# build powershell-native
 	(cd ${WRKSRC}/external/powershell-native/src/libpsl-native && \
 	       make)
