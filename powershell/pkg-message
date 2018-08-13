@@ -1,7 +1,10 @@
 This port was first created as part of a Google Summer of Code 2018 project
-by the current port maintainer.
+by the current port maintainer. This powershell port is a preview version.
 
-The powershell port is a preview version.
+The dotnet System.Console assembly, therefore PowerShell itself - which depends
+on it - requires an unhashed terminfo database to be located in the system's
+default terminfo location (/usr/share/misc/terminfo for PowerShell) or somewhere
+else provided it's explicit in the TERMINFO environment variable.
 
 The current version of the .NET runtime requires the following environment variables
 to be set. These are in order to disable crossgened version of assemblies that
