@@ -14,7 +14,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 ONLY_FOR_ARCHS=	amd64 i386
 
 BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
-RUN_DEPENDS=	dotnet:devel/dotnet
+RUN_DEPENDS=	dotnet:devel/dotnet \
+		bash:shells/bash
 
 USES=		mono:nuget
 USE_GITHUB=	yes
