@@ -6,7 +6,7 @@ DISTVERSION=	6.1.0-preview.4
 CATEGORIES=	shells
 
 MAINTAINER=	mateus@mateus.tech
-COMMENT=	PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.
+COMMENT=	PowerShell is a task automation and configuration management framework
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
@@ -53,13 +53,13 @@ post-patch:
 
 do-build:
 	# copy shared framework version
-	${SETENV} ${DOTNET_ENV} dotnet --list-runtimes | awk '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
+	${SETENV} ${DOTNET_ENV} dotnet --list-runtimes | ${AWK} '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
 	# generate ResGen files
 	(cd ${WRKSRC}/src/ResGen && \
 	       ${SETENV} ${DOTNET_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore && \
 	       ${SETENV} ${DOTNET_ENV} dotnet --fx-version $$(cat ${WRKSRC}/shared-framework-version.txt) bin/${BUILD_CONFIGURATION}/netcoreapp2.0/resgen.dll)
 	# generate type catalog
-	cat files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
+	${CAT} files/typecatalog.txt > ${WRKSRC}/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets
 	${SETENV} ${DOTNET_ENV} dotnet msbuild ${WRKSRC}/src/Microsoft.PowerShell.SDK/Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=${WRKSRC}/src/TypeCatalogGen/powershell.inc" /nologo
 	(cd ${WRKSRC}/src/TypeCatalogGen && \
 	       ${SETENV} ${DOTNET_ENV} dotnet run --no-restore ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs powershell.inc)
