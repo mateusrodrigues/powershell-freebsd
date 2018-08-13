@@ -13,10 +13,10 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 ONLY_FOR_ARCHS=	amd64 i386
 
-#BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
-#RUN_DEPENDS=	dotnet:devel/dotnet
+BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
+RUN_DEPENDS=	dotnet:devel/dotnet
 
-#USES=		mono:nuget
+USES=		mono:nuget
 USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
