@@ -13,10 +13,10 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 ONLY_FOR_ARCHS=	amd64 i386
 
-BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
-RUN_DEPENDS=	dotnet:devel/dotnet
+#BUILD_DEPENDS=	${LOCALBASE}/share/dotnet/sdk:devel/dotnet-sdk
+#RUN_DEPENDS=	dotnet:devel/dotnet
 
-USES=		mono:nuget
+#USES=		mono:nuget
 USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
@@ -68,8 +68,14 @@ do-build:
 		${SETENV} ${DOTNET_ENV} dotnet build -c ${BUILD_CONFIGURATION} --no-restore)
 	# build powershell-native
 	(cd ${WRKSRC}/external/powershell-native/src/libpsl-native && \
-	       make)
-	# copy native build results
-	${CP} ${WRKSRC}/external/powershell-native/src/powershell-unix/libpsl-native.so ${WRKSRC}/src/powershell-unix/bin/${BUILD_CONFIGURATION}/netcoreapp2.1/libpsl-native.so
+		make)
+
+do-install:
+	${MKDIR} ${STATEDIR}${PREFIX}/lib/powershell
+	(cd ${WRKSRC}/src/powershell-unix/bin/Release/netcoreapp2.1 && \
+		${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/powershell)
+	${INSTALL_LIB} ${WRKSRC}/external/powershell-native/src/powershell-unix/libpsl-native.so ${STAGEDIR}${PREFIX}/lib/powershell
+	${INSTALL_SCRIPT} files/pwsh ${STAGEDIR}${PREFIX}/bin
+	${REINPLACE_CMD} -e 's|%%PREFIX%%|${PREFIX}|g' ${STAGEDIR}${PREFIX}/bin/pwsh
 
 .include <bsd.port.mk>
