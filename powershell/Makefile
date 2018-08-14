@@ -53,6 +53,16 @@ post-patch:
 	@${CP} files/git-describe.txt ${WRKSRC}/git-describe.txt
 	@${REINPLACE_CMD} -e 's|%%WRKSRC%%|${WRKSRC}|g' ${WRKSRC}/PowerShell.Common.props
 
+do-configure:
+	# restore all packages
+	${SETENV} ${DOTNET_ENV} dotnet restore --source ${WRKDIR}/.nuget/packages ${WRKSRC}/src/powershell-unix/powershell-unix.csproj
+	${SETENV} ${DOTNET_ENV} dotnet restore --source ${WRKDIR}/.nuget/packages ${WRKSRC}/src/ResGen/ResGen.csproj
+	${SETENV} ${DOTNET_ENV} dotnet restore --source ${WRKDIR}/.nuget/packages ${WRKSRC}/src/TypeCatalogGen/TypeCatalogGen.csproj
+	# copy necessary files
+	cp files/git-describe.txt ${WRKSRC}/git-describe.txt
+	# configure PowerShell-Native
+	cd ${WRKSRC}/external/powershell-native/src/libpsl-native && cmake -DCMAKE_BUILD_TYPE=${BUILD_CONFIGURATION} .
+
 do-build:
 	# copy shared framework version
 	${SETENV} ${DOTNET_ENV} dotnet --list-runtimes | ${AWK} '{print $$2}' > ${WRKSRC}/shared-framework-version.txt
