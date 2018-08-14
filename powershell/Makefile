@@ -40,7 +40,6 @@ POWERSHELL_CORE_DEPENDS=	libpsl=6.0.0-rc \
 				Microsoft.PowerShell.Security=6.1.0-preview.4 \
 				System.Management.Automation=6.1.0-preview.4
 
-MAKE_JOBS_UNSAFE=	yes
 BUILD_CONFIGURATION=	Release
 DOTNET_ENV=	COMPlus_ZapDisable=1 \
 		COMPlus_ReadyToRun=0 \
